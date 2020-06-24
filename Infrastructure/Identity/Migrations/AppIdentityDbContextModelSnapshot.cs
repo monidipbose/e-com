@@ -38,6 +38,9 @@ namespace Infrastructure.Identity.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Pincode")
                         .HasColumnType("TEXT");
 

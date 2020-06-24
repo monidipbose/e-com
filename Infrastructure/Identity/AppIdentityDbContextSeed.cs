@@ -21,6 +21,7 @@ namespace Infrastructure.Identity
                     {
                         FirstName = "Monidip",
                         LastName = "Bose",
+                        PhoneNumber = "9804642559",
                         Street = "3no. Chandigarh",
                         City = "Madhyamgram",
                         State = "West Bengal",
