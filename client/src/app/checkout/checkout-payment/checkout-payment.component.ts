@@ -34,8 +34,7 @@ export class CheckoutPaymentComponent implements OnInit {
         this.router.navigate(['checkout/success'], navigationExtras);
       },
       (err) => {
-        this.toastr.error(err.message);
-        console.log(err.message);
+        console.log(err);
       }
     );
   }

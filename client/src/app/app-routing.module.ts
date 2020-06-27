@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
-import { NotFountComponent } from './core/not-fount/not-fount.component';
+import { NotFoundComponent } from './core/not-found/not-found.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'not-found',
-    component: NotFountComponent,
+    component: NotFoundComponent,
     data: { breadcrumb: 'Not Found' },
   },
   {
@@ -35,6 +35,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./checkout/checkout.module').then((mod) => mod.CheckoutModule),
     data: { breadcrumb: 'Checkout' },
+  },
+  {
+    path: 'orders',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./orders/orders.module').then((mod) => mod.OrdersModule),
+    data: { breadcrumb: 'Orders' },
   },
   {
     path: 'account',

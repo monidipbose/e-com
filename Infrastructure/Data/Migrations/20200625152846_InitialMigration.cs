@@ -67,7 +67,8 @@ namespace Infrastructure.Data.Migrations
                     DeliveryMethodId = table.Column<int>(nullable: true),
                     SubTotal = table.Column<double>(nullable: false),
                     Status = table.Column<string>(nullable: false),
-                    PaymentIntentId = table.Column<string>(nullable: true)
+                    PaymentIntentId = table.Column<string>(nullable: true),
+                    FailMessage = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -89,6 +90,9 @@ namespace Infrastructure.Data.Migrations
                     Name = table.Column<string>(maxLength: 100, nullable: false),
                     Description = table.Column<string>(maxLength: 180, nullable: false),
                     Price = table.Column<double>(type: "decimal(18,2)", nullable: false),
+                    Rating = table.Column<double>(nullable: false),
+                    AvailableQuantity = table.Column<int>(nullable: false),
+                    Limit = table.Column<int>(nullable: false),
                     PictureUrl = table.Column<string>(nullable: false),
                     ProductTypeId = table.Column<int>(nullable: false),
                     ProductBrandId = table.Column<int>(nullable: false)

@@ -12,9 +12,13 @@
                 <span class="font-weight-bold" style="font-size: 1.5em;">{{quantity}}</span>
                 <i (click)="incrementQuantity()" class="fa fa-plus-circle text-warning mx-2"
                     style="cursor: pointer; font-size: 2em;"></i>
-                <button (click)="addItemToBasket()" class="btn btn-outline-primary btn-lg ml-4">Add to
+                <button [disabled]="product.availableQuantity<1" (click)="addItemToBasket()"
+                    class="btn btn-primary btn-lg ml-4">Add to
                     Cart</button>
             </div>
+            <h6 class="mt-2" *ngIf="product.availableQuantity>0 && quantity==product.limit">Max {{product.limit}} quantities of this
+                product can be ordered at once</h6>
+            <h4 *ngIf="product.availableQuantity<1" style="color: #eb4141;">Sold Out</h4>
         </div>
         <div class="row mt-5">
             <div class="col-12 ml-3">

@@ -51,6 +51,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int?>("DeliveryMethodId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("FailMessage")
+                        .HasColumnType("TEXT");
+
                     b.Property<long>("OrderDate")
                         .HasColumnType("INTEGER");
 
@@ -99,10 +102,16 @@ namespace Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("AvailableQuantity")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasMaxLength(180);
+
+                    b.Property<int>("Limit")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -121,6 +130,9 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<int>("ProductTypeId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 

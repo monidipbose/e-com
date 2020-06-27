@@ -34,3 +34,12 @@
         transform: translateX(20px);
     }
 }
+
+button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+.outOfStock{
+    opacity: 0.3;
+}

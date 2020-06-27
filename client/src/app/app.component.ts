@@ -8,7 +8,7 @@ import { AccountService } from './account/account.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'SkiNet';
+  title = 'Bose Studio';
 
   constructor(
     private basketService: BasketService,

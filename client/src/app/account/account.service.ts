@@ -35,7 +35,7 @@ export class AccountService {
   }
 
   login(values: any) {
-    return this.http.put(this.baseUrl + 'account/login', values).pipe(
+    return this.http.post(this.baseUrl + 'account/login', values).pipe(
       map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20200623161635_InitialMigration")]
+    [Migration("20200625152846_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,9 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<int?>("DeliveryMethodId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("FailMessage")
+                        .HasColumnType("TEXT");
 
                     b.Property<long>("OrderDate")
                         .HasColumnType("INTEGER");
@@ -101,10 +104,16 @@ namespace Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("AvailableQuantity")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasMaxLength(180);
+
+                    b.Property<int>("Limit")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -123,6 +132,9 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<int>("ProductTypeId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 

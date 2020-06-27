@@ -23,13 +23,25 @@ namespace Infrastructure.Services
             // get basket from the repo
             var basket = await _basketRepo.GetBasketAsync(basketId);
 
-            // get items from the product repo
+            // get items from the product repo & checking for available quantity
             var items = new List<OrderItem>();
             foreach (var item in basket.Items)
             {
                 var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
+
+                if (item.Quantity > productItem.AvailableQuantity)
+                {
+                    return new Order { FailMessage = "Order can not be placed, any of the item's quantity in not available" };
+                }
+                if (item.Quantity > productItem.Limit)
+                {
+                    return new Order { FailMessage = "Only " + productItem.Limit + " items of " + productItem.Name + " can be placed for order at a time " };
+                }
+
                 var itemOrdered = new ProductItemOrdered(productItem.Id, productItem.Name, productItem.PictureUrl);
                 var orderItem = new OrderItem(itemOrdered, productItem.Price, item.Quantity);
+                productItem.AvailableQuantity = productItem.AvailableQuantity - item.Quantity;
+                _unitOfWork.Repository<Product>().Update(productItem);
                 items.Add(orderItem);
             }
 

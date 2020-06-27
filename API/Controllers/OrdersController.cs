@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Errors;
@@ -31,6 +29,10 @@ namespace API.Controllers
             var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
             var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
 
+            if (order.FailMessage != null)
+            {
+                return BadRequest(new ApiResponse(400, order.FailMessage));
+            }
             if (order == null)
             {
                 return BadRequest(new ApiResponse(400, "Problem creating oder"));
@@ -40,11 +42,12 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<OrderDto>>> GetOrdersForUser()
+        public async Task<ActionResult<IReadOnlyList<OrderToReturnDto>>> GetOrdersForUser()
         {
             var email = HttpContext.User.RetrieveEmailFromPrncipal();
             var orders = await _orderService.GetOrdersForUserAsync(email);
-            return Ok(_mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderDto>>(orders));
+            var toReturn = _mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDto>>(orders);
+            return Ok(toReturn);
         }
 
         [HttpGet("{id}")]
